@@ -1,0 +1,138 @@
+
+========================WOONGTAE KIM============================
+
+================================================================
+
+--1. SUBJECT TOTAL SCORE 를 내고 SNAME별 SNAME_SCORE 내기(FUNCTION)
+
+DROP FUNCTION SNAME_SCORE;
+
+CREATE OR REPLACE FUNCTION SNAME_SCORE(S_SNAME VARCHAR2)
+
+RETURN NUMBER
+
+IS
+	SNAME_SCORE NUMBER;
+	
+BEGIN
+		SELECT (AVG(KOREAN+ENGLISH+MATH))/3
+		INTO SNAME_SCORE
+		FROM STUDENT
+		WHERE SNAME = S_SNAME;
+		
+		RETURN SNAME_SCORE;
+END;
+/
+
+=============================USE================================
+
+SELECT SNAME_SCORE('장동건') FROM STUDENT;
+SELECT SNAME_SCORE('송중기') FROM DUAL;
+
+================================================================
+
+--2. SUBJECT TOTAL SCORE 를 내고 CLASS별 AVG_SCORE 내기(FUNCTION)
+
+DROP FUNCTION AVG_SCORE;
+
+CREATE OR REPLACE FUNCTION AVG_SCORE(S_CLASS VARCHAR2)
+
+RETURN NUMBER
+
+IS
+	AVG_SCORE NUMBER;
+	
+BEGIN
+		SELECT (AVG(KOREAN+ENGLISH+MATH))/3
+		INTO AVG_SCORE
+		FROM STUDENT
+		WHERE CLASS = S_CLASS
+		GROUP BY CLASS;
+		
+		RETURN AVG_SCORE;
+END;
+/
+
+=============================USE================================
+
+SELECT AVG_SCORE('A') FROM STUDENT;
+SELECT AVG_SCORE('C') FROM DUAL;
+
+================================================================
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+===========================INCHUL JI============================
+
+================================================================
+--1. 선생님 테이블에서 이름 입력받아 담당 과목, 경력 출력
+
+DROP PROCIDURE INFO_TEACHER;
+
+create or replace procedure info_teacher
+(v_tname IN teacher.tname%type,
+v_subject OUT teacher.subject%type,
+v_experience OUT teacher.experience%type)
+
+is
+
+begin
+  
+  select subject, experience
+      into v_subject, v_experience
+   from teacher
+    where tname = v_tname;
+
+end;
+/
+
+
+=============================USE================================
+
+-- 변수 선언
+variable vsubject varchar2(10);
+variable vexperience varchar2(10);
+
+-- 프로시저 호출
+
+execute info_teacher('김혜경', :vsubject, :vexperience);
+
+================================================================
+
+-- OUTPUT
+
+print vsubject
+print vexperience
+
+================================================================
+
+--2. 선생님 추가, tecno 중복 검사
+
+drop procedure insert_teacher;
+
+create or replace procedure insert_teacher(
+   v_tecno teacher.tecno%type,
+   v_tname teacher.tname%type,
+   v_sex teacher.sex%type,
+   v_subject teacher.subject%type,
+   v_experience teacher.experience%type)
+
+is
+
+begin
+   
+   insert into teacher values(v_tecno, v_tname, v_sex, v_subject, v_experience);
+   exception
+      when dup_val_on_index then
+         insert into teacher values(v_tecno+1, v_tname, v_sex, v_subject, v_experience);
+end;
+/
+
+=============================USE=============================
+
+execute insert_teacher(4, '박명수', '남', 'science', 20);
+execute insert_teacher(4, '박명수', '남', 'science', 20);
+
+select * from teacher;
+
+=============================================================
