@@ -27,7 +27,7 @@ END;
 =============================USE================================
 
 SELECT SNAME_SCORE('장동건') FROM STUDENT;
-SELECT SNAME_SCORE('송중기') FROM DUAL;
+SELECT SNAME_SCORE('김태희') FROM DUAL;
 
 ================================================================
 
@@ -56,7 +56,7 @@ END;
 =============================USE================================
 
 SELECT AVG_SCORE('A') FROM STUDENT;
-SELECT AVG_SCORE('C') FROM DUAL;
+SELECT AVG_SCORE('B') FROM DUAL;
 
 ================================================================
 
