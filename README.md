@@ -6,7 +6,6 @@
 ### Woongtae Kim [GitHub](https://github.com/angle2v)
 ### Inchul Ji [GitHub](https://github.com/inchul-ji)
 
-# - Home Work
 # - Used Programming Language
 ### - [PLSQL - Procedure , Function]
 
