@@ -3,13 +3,14 @@
 
 # - Team Members
 
-### Woongtae Kim [GitHub](https://github.com/angle2v)
-### Inchul Ji [GitHub](https://github.com/inchul-ji)
+### - Woongtae Kim [GitHub](https://github.com/angle2v)
+### - Inchul Ji [GitHub](https://github.com/inchul-ji)
 
 # - Used Programming Language
 ### - [PLSQL - Procedure , Function]
 
-## Used Language PLSQL - Procedure , Function
+# - Used Language
+### - PLSQL - Procedure , Function
 
 # - Content 
 ### - School Management System 
